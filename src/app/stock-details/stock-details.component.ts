@@ -34,7 +34,6 @@ export class StockDetailsComponent implements OnInit, OnChanges{
   }
 
   ngOnChanges() {
-    console.log(this.stockDetails);
     this.isMobile = window.innerWidth<768;
     this.height = window.innerWidth<=768?window.innerHeight*0.4:window.innerHeight-420;
     this.chartData = JSON.parse(JSON.stringify([]));

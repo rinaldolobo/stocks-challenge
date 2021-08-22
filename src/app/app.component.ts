@@ -126,7 +126,6 @@ export class AppComponent implements OnInit,OnDestroy{
   }
 
   ngOnDestroy() {
-    console.log('destroyed');
     this.stockService.getStockUpdates().complete();
     clearInterval(this.updateInterval);
   }
