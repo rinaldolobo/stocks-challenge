@@ -1,0 +1,108 @@
+<div class="stock-details-wrapper">
+  <div class="stock-details-pseudo">
+    <div class="sd-top">
+      <div class="sd-t1">
+        <div class="sd-price-details">
+          ${{stockDetails['stockCurrentPrice']}}
+        </div>
+        <div class="sd-status">
+          <fa-icon class="sd-icon" [ngClass]="stockDetails.priceDifference>0?'up':'down'" *ngIf="stockDetails.priceDifference!==0" [icon]="stockDetails.priceDifference>0?faChevronCircleUp:faChevronCircleDown"></fa-icon>
+        </div>
+      </div>
+      <div class="sd-t2">
+        <div class="sd-difference">
+          <div class="sd-value" *ngIf="stockDetails.priceDifference" [ngClass]="stockDetails.priceDifference>0?'up':'down'">
+            {{stockDetails.priceDifference>0?'+':''}}{{stockDetails.priceDifference}} ({{stockDetails.relativeDifference}}%)
+          </div>
+          <div class="sd-timestamp">
+            {{stockDetails.updatedTimestamp | date:('d MMM, YYYY, hh:mm a')}}
+          </div>
+        </div>
+        <div class="sd-name">
+          {{stockDetails.stockName}}
+        </div>
+      </div>
+    </div>
+    <div class="sd-chart" #containerRef >
+      <ngx-charts-line-chart
+        [view]="[containerRef.offsetWidth, height]"
+        [customColors]="getColor()"
+        [legend]="legend"
+        [showXAxisLabel]="showXAxisLabel"
+        [animations]="false"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxis]="xAxis"
+        [yAxis]="yAxis"
+        [yScaleMin]="yMin"
+        [yScaleMax]="yMax"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [timeline]="!isMobile"
+        [results]="chartData"
+      >
+        <ng-template #tooltipTemplate let-model="model">
+          <div class="line-tooltip" [style.borderTopColor]="model.difference>0?'#1fffd3':model.difference<0?'#ff5838':'#282e35'">
+            <div class="tt-name">
+              ${{model.value}}
+            </div>
+            <div class="tt-values">
+              <div class="tt-percent">
+                {{model.series}}
+              </div>
+              <div class="tt-percent" [style.color]="model.difference>0?'#1fffd3':'#ff5838'" *ngIf="model.difference">
+                {{model.difference>0?'+'+model.difference:model.difference}} ({{model.relativeDifference}}%)
+              </div>
+              <div class="tt-absolute">
+                {{model.timestamp | date:('dd MMM, YYYY, hh:mm a')}}
+              </div>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template #seriesTooltipTemplate let-model="model">
+          <div class="line-series-tooltip">
+            <div class="line-tooltip" [style.borderTopColor]="item.difference>0?'#1fffd3':item.difference<0?'#ff5838':'#282e35'" *ngFor="let item of model">
+              <div class="tt-name">
+                ${{item.value}}
+              </div>
+              <div class="tt-values">
+                <div class="tt-percent">
+                  {{item.series}}
+                </div>
+                <div class="tt-percent" [style.color]="item.difference>0?'#1fffd3':'#ff5838'" *ngIf="item.difference">
+                  {{item.difference>0?'+'+item.difference:item.difference}} ({{item.relativeDifference}}%)
+                </div>
+                <div class="tt-absolute">
+                  {{item.timestamp | date:('dd MMM, YYYY, hh:mm a')}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </ngx-charts-line-chart>
+    </div>
+    <div class="sd-bottom">
+    <div class="sdb-item-wrapper">
+      <div class="sdb-title">
+        High
+      </div>
+      <div class="sdb-data" [ngClass]="high['value']!==low['value']?'up':''">
+        ${{high['value']}}
+      </div>
+      <div class="sdb-time">
+        {{high['timestamp']|date:('dd MMM, YYYY, hh:mm a')}}
+      </div>
+    </div>
+    <div class="sdb-item-wrapper">
+      <div class="sdb-title">
+        Low
+      </div>
+      <div class="sdb-data" [ngClass]="high['value']!==low['value']?'down':''">
+        ${{low['value']}}
+      </div>
+      <div class="sdb-time">
+        {{low['timestamp']|date:('dd MMM, YYYY, hh:mm a')}}
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

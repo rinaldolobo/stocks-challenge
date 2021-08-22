@@ -1,0 +1,35 @@
+<div class="main" *ngIf="stocksData&&stocksData.length!==0">
+  <div class="title">
+    Live Stocks
+  </div>
+  <div class="stocks-container-parent">
+    <div class="stocks-container">
+      <div class="stocks-item-container">
+        <ng-scrollbar *ngIf="!isMobile">
+          <div class="stocks-item" [ngClass]="activeStock.stockName===stock.stockName?'active-stock':''" *ngFor="let stock of stocksData" (click)="activeStock=stock">
+            <div class="s-name">{{stock.stockName}}</div>
+            <div class="s-details">
+              <span class="s-price" [ngClass]="stock.priceDifference==0?'neutral':stock.priceDifference>0?'up':'down'">${{stock.stockCurrentPrice}}</span>
+              <span class="s-time">updated {{stock.readableUpdatedTime}}</span>
+            </div>
+          </div>
+        </ng-scrollbar>
+        <ng-container *ngIf="isMobile">
+          <div class="stocks-item" [ngClass]="activeStock.stockName===stock.stockName?'active-stock':''" *ngFor="let stock of stocksData" (click)="activeStock=stock">
+            <div class="s-name">{{stock.stockName}}</div>
+            <div class="s-details">
+              <span class="s-price" [ngClass]="stock.priceDifference==0?'neutral':stock.priceDifference>0?'up':'down'">${{stock.stockCurrentPrice}}</span>
+              <span class="s-time">updated {{stock.readableUpdatedTime}}</span>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <app-stock-details *ngIf="activeStock" [stockDetails]="activeStock"></app-stock-details>
+  </div>
+</div>
+
+<div class="loader-container" *ngIf="stocksData&&stocksData.length===0">
+  <div class="loader">Loading...</div>
+</div>
+

@@ -1,0 +1,214 @@
+@use "../../styles";
+
+.stock-details-wrapper {
+  display: flex;
+  flex-direction: column;
+  background: styles.$lightArea;
+  padding: 31px 15px;
+  .stock-details-pseudo{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-self: stretch;
+    justify-content: space-between;
+  }
+  .sd-top {
+    display: flex;
+    flex-direction: column;
+    .sd-t1{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      .sd-price-details {
+        color: #fff;
+        font-size: 28px;
+      }
+      .sd-status {
+        margin-left: 15px;
+        .sd-icon {
+          font-size: 25px;
+        }
+      }
+    }
+    .sd-t2 {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      .sd-difference {
+        display: flex;
+        flex-direction: column;
+        .sd-value{
+          font-size: 14px;
+          letter-spacing: 0.5px;
+          line-height: 25px;
+        }
+        .sd-timestamp {
+          color: styles.$greyText;
+          font-size: 14px;
+          letter-spacing: 0.2px;
+          line-height: 25px;
+        }
+      }
+      .sd-name {
+        font-size: 30px;
+        text-transform: uppercase;
+        color: #fff;
+        letter-spacing: 1px;
+      }
+    }
+    .down {
+      color: styles.$negative;
+    }
+    .up {
+      color: styles.$positive;
+    }
+  }
+  .sd-chart{
+    display: flex;
+    height: 40vh;
+    flex-direction: column;
+  }
+  .sd-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-top: 2px solid styles.$greyArea;
+    padding: 25px 0 0;
+    .sdb-item-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      .sdb-title {
+        color: #fff;
+        font-size: 18px;
+        padding: 10px 0;
+      }
+      .sdb-data {
+        color: #fff;
+        font-size: 26px;
+      }
+      .sdb-time {
+        color: styles.$greyText;
+        font-size: 12px;
+        letter-spacing: 0.2px;
+        line-height: 25px;
+      }
+      .down {
+        color: styles.$negative;
+      }
+      .up {
+        color: styles.$positive;
+      }
+      &:first-child{
+        border-right: 2px solid styles.$greyArea;
+      }
+    }
+  }
+}
+::ng-deep .ngx-charts-tooltip-content.type-tooltip{
+  color: #000000!important;
+  background: transparent!important;
+}
+
+::ng-deep .ngx-charts-tooltip-content .tooltip-caret{
+  display: none!important;
+}
+
+::ng-deep .line-tooltip {
+  display: inline-block;
+  text-align: left;
+  border: 1px solid #282e35;
+  border-top: 4px solid;
+  border-radius: 3px;
+  padding: 8px 12px;
+  background: #14181d;
+  max-width: 180px;
+}
+::ng-deep .line-tooltip .tt-name {
+  font-family: 'Nunito', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: normal;
+  display: inline-block;
+  width: 100%;
+}
+::ng-deep .line-tooltip .tt-values {
+  display: inline-block;
+  width: 100%;
+  margin-top: 5px;
+}
+::ng-deep .line-tooltip .tt-percent {
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  text-transform: uppercase;
+  line-height: 25px;
+  display: inline-block;
+  width: 100%;
+  white-space: normal;
+}
+::ng-deep .line-tooltip .tt-absolute {
+  font-family: 'Nunito', sans-serif;
+  font-size: 12px;
+  line-height: 20px;
+  color: #717171;
+  font-weight: 500;
+  display: inline-block;
+  width: 100%;
+  white-space: normal;
+}
+
+::ng-deep .line-series-tooltip{
+  display: flex;
+  flex-direction: column;
+  border-radius:4px;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  ::ng-deep .ngx-charts-tooltip-content.type-tooltip{
+    position: fixed;
+    left: 0!important;
+    top: 100px!important;
+  }
+}
+
+@media (min-width: 768px) {
+  .stock-details-wrapper {
+    display: flex;
+    flex-direction: column;
+    background: #1c2025;
+    padding: 31px 35px;
+    width: calc(100vw - 550px);
+    height: 100vh;
+    .stock-details-pseudo{
+      display: flex;
+      width:100%;
+      height: 100%;
+      flex-direction: column;
+      align-self: stretch;
+      justify-content: space-between;
+      .sd-top{
+        .sd-t1{
+          .sd-price-details{
+            font-size: 50px;
+          }
+          .sd-status{
+            .sd-icon{
+              font-size: 50px;
+            }
+          }
+        }
+      }
+      .sd-chart{
+        height:calc(100% - 250px);
+        justify-content: center;
+      }
+    }
+  }
+}

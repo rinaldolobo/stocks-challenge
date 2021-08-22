@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+$positive: #1fffd3;
+$negative: #ff5838;
+$lightArea: #1c2025;
+$darkArea: #14181d;
+$greyArea: #282e35;
+$greyText: #717171;
+
+*{
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: #1c2025;
+  font-family: 'Nunito', sans-serif;
+}

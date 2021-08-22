@@ -1,0 +1,8 @@
++ @angular/cdk@12.2.2
+added 3 packages from 8 contributors, updated 1 package and audited 1347 packages in 13.55s
+
+88 packages are looking for funding
+  run `npm fund` for details
+
+found 1 moderate severity vulnerability
+  run `npm audit fix` to fix them, or `npm audit` for details
